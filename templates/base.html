@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+    <head>
+        <a href="http://127.0.0.1:5000/blog">Main Blog Page</a> <span>&nbsp</span>
+        <a href="http://127.0.0.1:5000/newpost">Add A Blog Entry</a>
+
+        <title>{{title}}</title>
+    </head>
+<body>
+
+    {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+              {% for message in messages %}
+              <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
