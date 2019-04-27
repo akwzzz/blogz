@@ -90,27 +90,17 @@ def show_blogs():
     blog_id = request.args.get('id')
     blog_name = request.args.get('name')
     blog_body = request.args.get('body')
-    author_id = request.args.get('owner_id')
+    user = request.args.get('owner_id')
 
     if blog_id:
         blogs = Blog.query.filter_by(id=blog_id).first()
-        #indv_post = Blog.query.get(blog_id)
         return render_template('blog_entry.html', blog=blogs)
-    if author_id:
-        blogs_by_author = Blog.query.filter_by(owner_id=author_id)
-        return render_template('user.html', blogs=blogs_by_author)
+    if user:
+        blogs_by_user = Blog.query.filter_by(owner_id=user)
+        return render_template('singleUser.html', blogs=blogs_by_user)
     blogs = Blog.query.all()
     return render_template('blogs_view.html', blogs=blogs)
-
-    # if blog_id == None:
-    #     blogs = Blog.query.all()
-    #     return render_template('blogs_view.html', blogs=blogs)
-
-    # else:
-    #     blogs = Blog.query.filter_by(id=blog_id).first()
-    #     return render_template('blog_entry.html', blog=blogs)
-
-    
+  
     
 
 @app.route('/login', methods=['POST', 'GET'])
